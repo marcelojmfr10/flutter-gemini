@@ -1,0 +1,29 @@
+name: gemini_app
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^18.0.2
+  image_picker: ^1.2.4
+  flutter_chat_ui: ^2.12.0
+  uuid: ^4.6.0
+  dio: ^5.11.1
+  material_ui: ^1.6.0
+  flutter_riverpod: ^3.4.3
+  riverpod_annotation: ^4.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  riverpod_generator: ^4.0.9
+  build_runner: ^2.16.2
+
+flutter:
+  uses-material-design: true
