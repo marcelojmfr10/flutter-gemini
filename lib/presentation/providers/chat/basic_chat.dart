@@ -1,4 +1,5 @@
 import 'package:flutter_chat_types/flutter_chat_types.dart';
+import 'package:gemini_app/config/gemini/gemini_impl.dart';
 import 'package:gemini_app/presentation/providers/chat/is_gemini_writing.dart';
 import 'package:gemini_app/presentation/providers/users/user_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -10,8 +11,12 @@ final uuid = Uuid();
 
 @riverpod
 class BasicChat extends _$BasicChat {
+  final gemini = GeminiImpl();
+  late User geminiUser;
+
   @override
   List<Message> build() {
+    geminiUser = ref.read(geminiUserProvider);
     return [];
   }
 
@@ -20,33 +25,34 @@ class BasicChat extends _$BasicChat {
   }
 
   void _addTextMessage(PartialText partialText, User author) {
-    final message = TextMessage(
-      author: author,
-      id: uuid.v4(),
-      text: partialText.text,
-      createdAt: DateTime.now().microsecondsSinceEpoch,
-    );
-
-    state = [message, ...state];
+    _createTextMessage(partialText.text, author);
     _geminiTextResponse(partialText.text);
   }
 
   void _geminiTextResponse(String prompt) async {
-    final isGeminiWriting = ref.read(isGeminiWritingProvider.notifier);
-    final geminiUser = ref.read(geminiUserProvider);
-    isGeminiWriting.setIsWriting();
+    _setGeminiWritingStatus(true);
 
-    await Future.delayed(Duration(seconds: 2));
+    final textResponse = await gemini.getResponse(prompt);
 
-    isGeminiWriting.setIsNotWriting();
+    _setGeminiWritingStatus(false);
+    _createTextMessage(textResponse, geminiUser);
+  }
 
+  void _createTextMessage(String text, User author) {
     final message = TextMessage(
-      author: geminiUser,
+      author: author,
       id: uuid.v4(),
-      text: 'hola mundo desde gemini: $prompt',
+      text: text,
       createdAt: DateTime.now().microsecondsSinceEpoch,
     );
 
     state = [message, ...state];
+  }
+
+  void _setGeminiWritingStatus(bool isWriting) {
+    final isGeminiWriting = ref.read(isGeminiWritingProvider.notifier);
+    isWriting
+        ? isGeminiWriting.setIsWriting()
+        : isGeminiWriting.setIsNotWriting();
   }
 }
