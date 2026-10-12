@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:gemini_app/config/router/app_router.dart';
+import 'package:gemini_app/config/theme/app_theme.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MainApp());
+  AppTheme.setSystemUIOverlayStyle(isDarkMode: true);
+  runApp(ProviderScope(child: GeminiApp()));
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class GeminiApp extends StatelessWidget {
+  const GeminiApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+      routerConfig: appRouter,
+      theme: AppTheme(isDarkMode: true).getTheme(),
     );
   }
 }
