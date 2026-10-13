@@ -9,51 +9,51 @@ part of 'selected_art_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(SelectedArt)
-final selectedArtProvider = SelectedArtProvider._();
+@ProviderFor(SelectedArtStyle)
+final selectedArtStyleProvider = SelectedArtStyleProvider._();
 
-final class SelectedArtProvider
-    extends $NotifierProvider<SelectedArt, dynamic> {
-  SelectedArtProvider._()
+final class SelectedArtStyleProvider
+    extends $NotifierProvider<SelectedArtStyle, String> {
+  SelectedArtStyleProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'selectedArtProvider',
+        name: r'selectedArtStyleProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$selectedArtHash();
+  String debugGetCreateSourceHash() => _$selectedArtStyleHash();
 
   @$internal
   @override
-  SelectedArt create() => SelectedArt();
+  SelectedArtStyle create() => SelectedArtStyle();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(dynamic value) {
+  Override overrideWithValue(String value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<dynamic>(value),
+      providerOverride: $SyncValueProvider<String>(value),
     );
   }
 }
 
-String _$selectedArtHash() => r'59509ceaa1b69af63a4a58db5dfc19de72e924af';
+String _$selectedArtStyleHash() => r'da9173028f99061589e2b3e5c431f482f20d2c49';
 
-abstract class _$SelectedArt extends $Notifier<dynamic> {
-  dynamic build();
+abstract class _$SelectedArtStyle extends $Notifier<String> {
+  String build();
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref = this.ref as $Ref<dynamic, dynamic>;
+    final ref = this.ref as $Ref<String, String>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<dynamic, dynamic>,
-              dynamic,
+              AnyNotifier<String, String>,
+              String,
               Object?,
               Object?
             >;
