@@ -28,6 +28,15 @@ class HomeScreen extends StatelessWidget {
             subtitle: Text('Mantener el contexto de mensajes'),
             onTap: () => context.push('/history-chat'),
           ),
+          ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.yellow,
+              child: Icon(Icons.image_outlined),
+            ),
+            title: Text('Generación de imágenes'),
+            subtitle: Text('Crea y edita imágenes con AI'),
+            onTap: () => context.push('/image-playground'),
+          ),
         ],
       ),
     );
